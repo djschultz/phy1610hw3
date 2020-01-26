@@ -30,6 +30,7 @@
 // 2019-2020
 
 #include <iostream>
+#include <rarray>
 #include "partition.hpp"
 #include "vectorization.hpp"
 #include "ants.hpp"
@@ -53,14 +54,13 @@ int main()
     // ===================== define arrays  ================== //
     
     // work arrays; these are linearized two-dimensional arrays
-    int* number_of_ants_on_table = new int[length*length];   // distribution of ants on the table over squares.
-    int* new_number_of_ants_on_table = new int[length*length]; // auxiliary array used in time step to hold the new distribution of ants
+    rarray<int,2> number_of_ants_on_table(length,length);   // distribution of ants on the table over squares.
+    rarray<int,2> new_number_of_ants_on_table(length,length); // auxiliary array used in time step to hold the new distribution of ants
     int* partition = new int[nmoves];                 // used to determine how many ants move in which direction in a time step
 
     // ===================== initialize simulation ================== //
     
-    
-    placeAnts(length, total_ants, number_of_ants_on_table);
+    placeAnts(length, total_ants, number_of_ants_on_table.data());
 
     // count ants and determine minimum and maximum number on a square
         
@@ -72,7 +72,7 @@ int main()
     antData[2] = 0;
     
     //Count how many total ants there are on the table. This total number is put into antData[2].
-    countAnts(length, antData, number_of_ants_on_table);
+    countAnts(length, antData, number_of_ants_on_table.data());
     
     // ===================== start simulation ================== //
     
@@ -87,12 +87,10 @@ int main()
         antData[1] = 0;
         antData[2] = 0;
         // Perform a time step of the ants' movement.
-        incrementTime(length, nmoves, timestep, antData, number_of_ants_on_table, new_number_of_ants_on_table, partition, moves);
+        incrementTime(length, nmoves, timestep, antData, number_of_ants_on_table.data(), new_number_of_ants_on_table.data(), partition, moves);
     }
 
-    //Delete the dynamically allocated arrays
-    delete [] number_of_ants_on_table;
-    delete [] new_number_of_ants_on_table;
+    //Delete the dynamically allocated arras;
     delete [] partition;
     delete [] antData;
     
