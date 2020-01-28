@@ -8,20 +8,20 @@
 
 #include "ants.hpp"
 #include "vectorization.hpp"
+#include <rarray>
 
-
-void placeAnts(int length, int total_ants, int* number_of_ants_on_table){
+void placeAnts(int length, int total_ants, rarray<int,2> number_of_ants_on_table){
     // place the ants evenly on the table
     for (int i = 0; i < length; i++) {
         for (int j = 0; j < length; j++) {
-            int n = linear(i, j, length, length);
-            number_of_ants_on_table[n] = ((long long)(n+1)*total_ants)/(length*length) - ((long long)(n)*total_ants)/(length*length);
+           	int n = linear(i, j, length, length); 
+		number_of_ants_on_table[i][j] = ((long long)(n+1)*total_ants)/(length*length) - ((long long)(n)*total_ants)/(length*length);;
         }
     }
 }
 
 
-void countAnts(int length, int* antData, int* number_of_ants_on_table){
+void countAnts(int length, int* antData, rarray<int,2> number_of_ants_on_table){
 
     int nmin = antData[0];
     int nmax = antData[1];
@@ -29,13 +29,12 @@ void countAnts(int length, int* antData, int* number_of_ants_on_table){
     
     for (int i = 0; i < length; i++) {
         for (int j = 0; j < length; j++) {
-            int n = linear(i, j, length, length); // linear index
-            total_ants += number_of_ants_on_table[n];
-            if (nmin > number_of_ants_on_table[n]) {
-                nmin = number_of_ants_on_table[n];
+            total_ants += number_of_ants_on_table[i][j];
+            if (nmin > number_of_ants_on_table[i][j]) {
+                nmin = number_of_ants_on_table[i][j];
             }
-            if (nmax < number_of_ants_on_table[n]) {
-                nmax = number_of_ants_on_table[n];
+            if (nmax < number_of_ants_on_table[i][j]) {
+                nmax = number_of_ants_on_table[i][j];
             }
         }
     }

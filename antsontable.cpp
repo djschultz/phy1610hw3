@@ -57,23 +57,23 @@ int main()
     // work arrays; these are linearized two-dimensional arrays
     rarray<int,2> number_of_ants_on_table(length,length);   // distribution of ants on the table over squares.
     rarray<int,2> new_number_of_ants_on_table(length,length); // auxiliary array used in time step to hold the new distribution of ants
-    int* partition = new int[nmoves];                 // used to determine how many ants move in which direction in a time step
+    rarray<int,1> partition(nmoves);                 // used to determine how many ants move in which direction in a time step
 
     // ===================== initialize simulation ================== //
     
-    placeAnts(length, total_ants, number_of_ants_on_table.data());
+    placeAnts(length, total_ants, number_of_ants_on_table);
 
     // count ants and determine minimum and maximum number on a square
         
     //Initialize antData array
     //the antData contains the minimum number of ants, maximum number of ants, and total number of ants as its zeroth, first, and second element respectively.
-    int* antData = new int[3];
+    rarray<int,1> antData(3);
     antData[0] = total_ants;
     antData[1] = 0;
     antData[2] = 0;
     
     //Count how many total ants there are on the table. This total number is put into antData[2].
-    countAnts(length, antData, number_of_ants_on_table.data());
+    countAnts(length, antData, number_of_ants_on_table);
     
     // ===================== start simulation ================== //
     
@@ -87,16 +87,14 @@ int main()
         antData[0] = total_ants;
         antData[1] = 0;
         antData[2] = 0;
+
+	std::string filename = "ants.rat";
         // Perform a time step of the ants' movement.
-        incrementTime(length, nmoves, timestep, antData, number_of_ants_on_table.data(), new_number_of_ants_on_table.data(), partition, moves);
+        incrementTime(length, nmoves, timestep, antData, number_of_ants_on_table, new_number_of_ants_on_table, partition, moves);
 	if(timestep % 1000 == 0){
-	  print_rarray(number_of_ants_on_table);
+	  print_rarray(number_of_ants_on_table, filename);
 	}
     }
-
-    //Delete the dynamically allocated arras;
-    delete [] partition;
-    delete [] antData;
     
     return 0;
 }

@@ -10,6 +10,7 @@
 #define timeEvolve_hpp
 
 #include <stdio.h>
+#include <rarray>
 
 /// @brief Function to perform a time step for the ants moving
 /// @param length side length of the table
@@ -20,6 +21,6 @@
 /// @param new_number_of_ants_on_table array holding updated numbers of ants on table after timestep
 /// @param partition array determining how many ants moving in each direction
 /// @param moves array listing possible moves an ant can make
-void incrementTime(int length, int nmoves, int timestep, int* antData, int* number_of_ants_on_table, int* new_number_of_ants_on_table, int* partition, const int moves[][2]);
+void incrementTime(int length, int nmoves, int timestep, rarray<int,1> antData, rarray<int,2> number_of_ants_on_table, rarray<int,2> new_number_of_ants_on_table, rarray<int,1> partition, const int moves[][2]);
 
 #endif /* timeEvolve_hpp */

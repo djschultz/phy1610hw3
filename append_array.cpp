@@ -6,11 +6,11 @@
 #include <rarrayio>
 #include <fstream>
 
-void print_rarray(rarray<int,2> myrarray){
+void print_rarray(rarray<int,2> myrarray, std::string filename){
     std::ofstream fout;
     std::ifstream fin;
-    fin.open("test.txt");
-    fout.open("test.txt",std::ios::app);
+    fin.open(filename);
+    fout.open(filename, std::ios::app);
     if(fin.is_open()){
         fout << myrarray << std::endl;
     }
