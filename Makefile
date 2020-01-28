@@ -7,8 +7,8 @@ CXX = g++
 flags = -std=c++14 -O3 -march=native
 
 #Link all of the out files and combine into an executable called antsontable
-antsontable: antsontable.o ants.o partition.o vectorization.o timeEvolve.o report.o
-	$(CXX) $(flags) -o antsontable antsontable.o ants.o partition.o vectorization.o timeEvolve.o report.o
+antsontable: antsontable.o ants.o partition.o vectorization.o timeEvolve.o report.o append_array.o
+	$(CXX) $(flags) -o antsontable antsontable.o ants.o partition.o vectorization.o timeEvolve.o report.o append_array.o
 
 #Individually compile all of the modules without making an executable
 antsontable.o: antsontable.cpp ants.hpp partition.hpp vectorization.hpp timeEvolve.hpp report.hpp
@@ -28,6 +28,9 @@ timeEvolve.o: timeEvolve.cpp partition.hpp report.hpp ants.hpp vectorization.hpp
 
 report.o: report.cpp
 	$(CXX) $(flags) -c -o report.o report.cpp
+
+append_array.o: append_array.cpp
+	$(CXX) $(flags) -c -o append_array.o append_array.cpp
 
 clean: 
 	rm -f antsontable.o ants.o partition.o vectorization.o timeEvolve.o report.o antsontable

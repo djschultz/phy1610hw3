@@ -36,6 +36,7 @@
 #include "ants.hpp"
 #include "timeEvolve.hpp"
 #include "report.hpp"
+#include "append_array.hpp"
 
 // There are (3 in the i direction)x(3 in the j direction)=9 possible moves
 const int nmoves = 9;
@@ -88,6 +89,9 @@ int main()
         antData[2] = 0;
         // Perform a time step of the ants' movement.
         incrementTime(length, nmoves, timestep, antData, number_of_ants_on_table.data(), new_number_of_ants_on_table.data(), partition, moves);
+	if(timestep % 1000 == 0){
+	  print_rarray(number_of_ants_on_table);
+	}
     }
 
     //Delete the dynamically allocated arras;
