@@ -80,7 +80,7 @@ int main()
     // report
     report(0,antData);
     
-
+    std::string filename = "ants.rat";
     // run time steps
     for (int timestep = 0; timestep < ntimesteps; timestep++) {
         // Reset antData array
@@ -88,14 +88,13 @@ int main()
         antData[1] = 0;
         antData[2] = 0;
 
-	std::string filename = "ants.rat";
         // Perform a time step of the ants' movement.
         incrementTime(length, nmoves, timestep, antData, number_of_ants_on_table, new_number_of_ants_on_table, partition, moves);
-	if(timestep % 1000 == 0){
+	
+        if(timestep%1000 == 0){
 	  print_rarray(number_of_ants_on_table, filename);
 	}
     }
-    
     return 0;
 }
 

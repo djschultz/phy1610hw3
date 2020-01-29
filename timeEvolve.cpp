@@ -1,6 +1,6 @@
 //
 //  timeEvolve.cpp
-//  phys1610hw2
+//  phys1610hw3
 //
 //  Created by Daniel Schultz on 2020-01-20.
 //  Copyright © 2020 Daniel Schultz. All rights reserved.

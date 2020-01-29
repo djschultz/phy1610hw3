@@ -1,6 +1,6 @@
 //
 //  report.cpp
-//  phys1610hw2
+//  phys1610hw3
 //
 //  Created by Daniel Schultz on 2020-01-23.
 //  Copyright © 2020 Daniel Schultz. All rights reserved.

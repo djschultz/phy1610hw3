@@ -33,5 +33,5 @@ append_array.o: append_array.cpp
 	$(CXX) $(flags) -c -o append_array.o append_array.cpp
 
 clean: 
-	rm -f antsontable.o ants.o partition.o vectorization.o timeEvolve.o report.o antsontable
+	rm -f antsontable.o ants.o partition.o vectorization.o timeEvolve.o report.o antsontable ants.rat output.dat append_array.o
 	

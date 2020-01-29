@@ -1,4 +1,4 @@
-
+// phys1610hw3
 
 #include "append_array.hpp"
 #include <iostream>
@@ -8,13 +8,8 @@
 
 void print_rarray(rarray<int,2> myrarray, std::string filename){
     std::ofstream fout;
-    std::ifstream fin;
-    fin.open(filename);
     fout.open(filename, std::ios::app);
-    if(fin.is_open()){
-        fout << myrarray << std::endl;
-    }
-    fin.close();
+    fout << myrarray << std::endl;
     fout.close();
 }
 
